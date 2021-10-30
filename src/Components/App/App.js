@@ -73,6 +73,9 @@ class App extends React.Component {
           })
         })
   }
+  componentDidMount() {
+    window.addEventListener('load', () => {Spotify.getAccessToken()});
+  }
 
   render() {
     return (

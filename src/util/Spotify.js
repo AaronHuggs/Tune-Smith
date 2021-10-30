@@ -1,7 +1,7 @@
 
 var accessToken;
 const clientID = '5a8e5c95aa6c45d9bd4deaffc2f5e659';
-const redirectURI = 'http://localhost:3000/';
+const redirectURI = 'https://tune-smith.surge.sh/';
 
 const Spotify = {
     getAccessToken() {
@@ -77,6 +77,7 @@ const Spotify = {
                 });
         })
     }
+    
 
 }
 
