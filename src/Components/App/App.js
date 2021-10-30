@@ -14,19 +14,22 @@ class App extends React.Component {
           name: 'ATWA',
           artist: 'System of a Down',
           album: 'Toxicity',
-          id: 1
+          id: 1,
+          uri: 'spotify:track:6gCVA6ja6g0foIsWv0RuSZ'
         },
         {
           name: 'Toxicity',
           artist: 'System of a Down',
           album: 'Toxicity',
-          id: 2
+          id: 2,
+          uri: 'spotify:track:0snQkGI5qnAmohLE7jTsTn'
         },
         {
           name: 'Psycho',
           artist: 'System of a Down',
           album: 'Toxicity',
-          id: 3
+          id: 3,
+          uri: 'spotify:track:6VzV6RI7641o57TuqfGRpj'
         }
       ],
       playlistName: 'Cool Tunes',
@@ -35,19 +38,22 @@ class App extends React.Component {
           name: 'First Kill',
           artist: 'Amon Amarth',
           album: 'Jomsviking',
-          id: 4
+          id: 4,
+          uri: 'spotify:track:7wVdKwd0CZkzLT2cRcTSqz'
         },
         {
           name: 'Buzzin',
           artist: 'Alina Baraz',
           album: 'Buzzin',
-          id: 5
+          id: 5,
+          uri: 'spotify:track:6WUgEQwCbnaPrLf9V5K4HG'
         },
         {
           name: 'Spirit Crusher',
           artist: 'Death',
           album: 'The Sound of Perseverance',
-          id: 6
+          id: 6,
+          uri: 'spotify:track:3sSonVXqDeoEFj2lM7mpYT'
         }
       ],
     }
@@ -55,6 +61,7 @@ class App extends React.Component {
     this.addTrack = this.addTrack.bind(this);
     this.removeTrack = this.removeTrack.bind(this);
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
+    this.savePlaylist = this.savePlaylist.bind(this);
   }
 
   addTrack(track) {
@@ -87,6 +94,12 @@ class App extends React.Component {
     })
   }
 
+  savePlaylist() {
+    let trackURIs = [];
+    this.state.playlistTracks.forEach(track => trackURIs.push(track.uri))
+    console.log(trackURIs);
+    
+  }
 
   render() {
     return (
@@ -102,9 +115,9 @@ class App extends React.Component {
             <Playlist 
               playlistName = {this.state.playlistName}
               playlistTracks = {this.state.playlistTracks}
-              onAdd = {this.addTrack}
               onRemove = {this.removeTrack}
               onNameChange = {this.updatePlaylistName}
+              onSave = {this.savePlaylist}
             />
           </div>
         </div>
