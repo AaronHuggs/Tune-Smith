@@ -4,58 +4,15 @@ import './App.css';
 import SearchBar from '../SearchBar/SearchBar';
 import SearchResults from '../SearchResults/SearchResults';
 import Playlist from '../Playlist/Playlist';
+import Spotify from '../../util/Spotify';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchResults: [
-        {
-          name: 'ATWA',
-          artist: 'System of a Down',
-          album: 'Toxicity',
-          id: 1,
-          uri: 'spotify:track:6gCVA6ja6g0foIsWv0RuSZ'
-        },
-        {
-          name: 'Toxicity',
-          artist: 'System of a Down',
-          album: 'Toxicity',
-          id: 2,
-          uri: 'spotify:track:0snQkGI5qnAmohLE7jTsTn'
-        },
-        {
-          name: 'Psycho',
-          artist: 'System of a Down',
-          album: 'Toxicity',
-          id: 3,
-          uri: 'spotify:track:6VzV6RI7641o57TuqfGRpj'
-        }
-      ],
-      playlistName: 'Cool Tunes',
-      playlistTracks: [
-        {
-          name: 'First Kill',
-          artist: 'Amon Amarth',
-          album: 'Jomsviking',
-          id: 4,
-          uri: 'spotify:track:7wVdKwd0CZkzLT2cRcTSqz'
-        },
-        {
-          name: 'Buzzin',
-          artist: 'Alina Baraz',
-          album: 'Buzzin',
-          id: 5,
-          uri: 'spotify:track:6WUgEQwCbnaPrLf9V5K4HG'
-        },
-        {
-          name: 'Spirit Crusher',
-          artist: 'Death',
-          album: 'The Sound of Perseverance',
-          id: 6,
-          uri: 'spotify:track:3sSonVXqDeoEFj2lM7mpYT'
-        }
-      ],
+      searchResults: [],
+      playlistName: 'New Playlist',
+      playlistTracks: [],
     }
 
     this.addTrack = this.addTrack.bind(this);
@@ -97,13 +54,24 @@ class App extends React.Component {
 
   savePlaylist() {
     let trackURIs = [];
+    let playlistName = this.state.playlistName;
     this.state.playlistTracks.forEach(track => trackURIs.push(track.uri))
-    console.log(trackURIs);
-    
+    Spotify.savePlaylist(playlistName,trackURIs);
+    playlistName = 'New Playlist';
+    this.setState({
+      playlistName: playlistName,
+      playlistTracks: []
+    });
+    document.querySelectorAll('input')[1].value = 'New Playlist';
   }
 
   search(term) {
-    console.log(term);
+    Spotify.search(term)
+      .then(updateSearch => {
+          this.setState ({
+              searchResults: updateSearch
+          })
+        })
   }
 
   render() {
