@@ -1,6 +1,6 @@
 # TuneSmith
 
-This project was created as part of Codecademy's Web Development course.
+This project was created as part of Codecademy's Web Development course. It uses React and the Spotify API.
 
 ## What does it do?
 
